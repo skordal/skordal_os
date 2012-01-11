@@ -1,0 +1,10 @@
+SkordalOS Applications Readme
+#############################
+
+This folder contains applications for SkordalOS. They are built together
+with the OS, or by running:
+	make apps
+from the top-level directory.
+
+
+

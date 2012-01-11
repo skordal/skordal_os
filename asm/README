@@ -1,0 +1,10 @@
+SkordalOS Assembler Functions
+#############################
+
+This folder contains various assembler functions used in the OS. They were
+put in this folder because they are not considered a module of the operating
+system in itself.
+
+The functions are used by including asm/functions.h and linking to
+libasm_functions. The linking is done automatically by the build process.
+

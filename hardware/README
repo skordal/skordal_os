@@ -1,0 +1,7 @@
+SkordalOS Hardware Header Files Readme
+######################################
+
+This folder contains header files with various defines for the hardware
+components of the BeagleBoard. They should be designed so that they can
+be used by preprocessed assembler code as well as C code.
+
