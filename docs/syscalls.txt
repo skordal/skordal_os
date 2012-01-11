@@ -1,0 +1,8 @@
+SkordalOS System Call Information
+#################################
+
+System calls, or supervisor calls, are called with all arguments in
+registers, starting at r0. The return value of a system call is placed in
+r0. This works just like normal functions, except the stack can not be used.
+
+System call numbers are found in the syscalls.h header.

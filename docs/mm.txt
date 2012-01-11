@@ -1,0 +1,15 @@
+SkordalOS Memory Manager
+########################
+
+The memory manager works by treating the memory as a linked list of memory
+blocks. The first block is allocated after the MMU has been initialized.
+
+At the start of each block is a small structure with information about
+the size of the block and where its neighbours are. The neccessity of
+having such a block causes a slight memory overhead, particularily when
+allocating many small blocks of memory. It should, however, prevent
+the memory from becoming too fragmented.
+
+For now, allocation is O(n) in worst case, n being the number of memory
+blocks. This will be improved later. Freeing memory is O(1).
+

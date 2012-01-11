@@ -1,0 +1,9 @@
+SkordalOS C Library
+###################
+
+This folder contains an implementation of the standard C library. These
+functions are used by the applications in the $(top)/apps folder.
+
+At the moment, only a few functions are implemented, but as the OS gains
+the ability to run applications, more functions will be added.
+

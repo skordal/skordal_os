@@ -1,0 +1,23 @@
+SkordalOS Executable Format
+###########################
+
+NOTE: This is very preliminary information, as the OS cannot actually
+execute applications yet. Even so, at the moment the apps/ folder contains
+a simple hello world application.
+
+All executable files consists of three sections; text, data and bss.
+
+At the beginning of the executable is the following header:
+	Offset	Description
+	0	Entry point address.
+	4	Magic byte: 'S'
+	| 5	Magic byte: 'O'
+	| 6	Magic byte: 'S'
+	| 7	Version of executable format, currently 1.
+	8	Address of the start of the data section.
+	12	Address of the start of the bss section.
+	16	Address of the end of the executable.
+
+All section addresses must be aligned to 4096. Shared libraries are not
+supported.
+

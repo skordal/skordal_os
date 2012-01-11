@@ -1,0 +1,24 @@
+SkordalOS Readme
+################
+
+SkordalOS is a small, simple operating system for the BeagleBoard. It was 
+created as a learning excercise for myself, but I hope it may be useful
+for others.
+
+To build SkordalOS, you will need:
+	* Standard UNIX utilities, e.g. cp, rm, mkdir and possibly others.
+	  Also important is make, without which the project will not build.
+	* An arm-none-eabi toolchain. The build process uses gcc, ld, ar,
+	  ranlib and objcopy from the toolchain.
+	* Das U-Boot tools, specifically mkimage, to create the uImage.
+
+When you have installed these tools, have a look in config.mk and see if
+everything is to your liking. The build flags probably should not be 
+changed, but you may try.
+
+Now you type 'make'.
+
+After a pretty short, or, depending on your hardware, long, wait, you should
+have a uImage file in your skordal_os directory. This file may now be sent
+to your BeagleBoard using minicom or loaded onto an SD-card for testing.
+
