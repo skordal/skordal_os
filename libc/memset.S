@@ -15,8 +15,7 @@ memset:
 
 1:
 	str r1, [r3], #1
-	sub r2, #1
-	cmp r2, #0
+	subs r2, #1
 	bne 1b
 
 	bx lr

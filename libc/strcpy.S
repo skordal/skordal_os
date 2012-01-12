@@ -39,8 +39,7 @@ strncpy:
 	cmp v1, #0
 	beq 2f
 
-	sub r2, #1
-	cmp r2, #0
+	subs r2, #1
 	bne 1b
 
 2:
