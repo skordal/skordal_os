@@ -4,6 +4,15 @@
 #ifndef HARDWARE_MMU_H
 #define HARDWARE_MMU_H
 
+// Base addresses
+#define MMU_CAMERA_BASE	0x480bd400
+#define MMU_IVA2_BASE	0x5d000000
+
+// Register offsets:
+#define MMU_REVISION	0x00
+
+// ----- ARM MMU Definitions: -----
+
 // First level descriptor table entry types:
 #define MMU_L1_TYPE_FAULT		0b00
 #define MMU_L1_TYPE_PAGE_TABLE		0b01

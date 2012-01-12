@@ -12,6 +12,7 @@ OBJECTS := \
 	i2c.o \
 	interrupts.o \
 	irq.o \
+	iva2.o \
 	kernel.o \
 	mm.o \
 	mmu.o \
@@ -75,6 +76,9 @@ interrupts.o: interrupts.S
 
 irq.o: irq.c irq.h
 	$(CC) $(CFLAGS) -c irq.c -o irq.o
+
+iva2.o: iva2.c iva2.h
+	$(CC) $(CFLAGS) -c iva2.c -o iva2.o
 
 kernel.o: kernel.c kernel.h
 	$(CC) $(CFLAGS) -c kernel.c -o kernel.o
