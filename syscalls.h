@@ -6,22 +6,24 @@
 
 // Syscalls are called using the svc instruction from assembler code. The
 // syscall number should be specified as parameter. Invalid syscall numbers
-// whill result in the programme being terminated with SIGILL.
+// will terminate the calling application.
 
 // The exit syscall, called at the end of programmes:
 #define SYSCALL_EXIT	1
 // The yield syscall, used to allow other programmes to run in this process'
 // timeslot:
 #define SYSCALL_YIELD	2
+// The brk syscall sets the end of the application's dataspace:
+#define SYSCALL_BRK	3
 
 // UNIX syscall: open
-#define SYSCALL_OPEN	3
+#define SYSCALL_OPEN	10
 // UNIX syscall: close
-#define SYSCALL_CLOSE	4
+#define SYSCALL_CLOSE	11
 // UNIX syscall: read
-#define SYSCALL_READ	5
+#define SYSCALL_READ	12
 // UNIX syscall: write
-#define SYSCALL_WRITE	6
+#define SYSCALL_WRITE	13
 
 #endif
 
