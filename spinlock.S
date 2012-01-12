@@ -18,6 +18,7 @@ spinlock_lock:
 	streq r2, [r0]
 @	strexeq r1, r2, [r0]
 @	cmpeq r1, #0
+	yieldne
 	bne 1b
 
 	bx lr
