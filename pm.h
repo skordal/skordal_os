@@ -16,8 +16,8 @@
 // Initializes the Power Management driver:
 void pm_init();
 
-// Resets the board, as in "reboot":
-void __attribute((noreturn)) pm_reset();
+// Reboots the system by resetting the entire board:
+void __attribute((noreturn)) pm_reboot();
 
 #endif
 

@@ -28,8 +28,8 @@ void pm_init()
 	debug_print_newline();
 }
 
-// Resets the entire board:
-void __attribute((noreturn)) pm_reset()
+// Reboots the system by resetting the entire board:
+void __attribute((noreturn)) pm_reboot()
 {
 	volatile uint32_t * memspace = HW_ADDR(PM_PRM_BASE);
 	memspace[REG_32(PM_PRM_RSTCTRL)] = 1 << 2;
