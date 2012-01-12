@@ -1,5 +1,7 @@
 @ SkordalOS C Library
 @ (c) Kristian K. Skordal 2011 - 2012 <kristian.skordal@gmail.com>
+.syntax unified
+.section .text
 
 @ strcpy - Copies a string.
 @ Arguments:
@@ -16,6 +18,7 @@ strcpy:
 	ldrb r3, [r1], #1
 	strb r3, [r2], #1
 	cmp r3, #0
+	it ne
 	bne 1b
 
 	bx lr
@@ -37,9 +40,11 @@ strncpy:
 	ldrb v1, [r1], #1
 	strb v1, [r3], #1
 	cmp v1, #0
+	it eq
 	beq 2f
 
 	subs r2, #1
+	it ne
 	bne 1b
 
 2:

@@ -1,5 +1,6 @@
 @ SkordalOS C Library
 @ (c) Kristian K. Skordal 2011 - 2012 <kristian.skordal@gmail.com>
+.syntax unified
 .section .text
 
 @ strlen - measures string length.
@@ -15,6 +16,7 @@ strlen:
 1:
 	ldrb r2, [r0], #1	@ Load byte from string.
 	cmp r2, #0		@ Check for end-of-string zero.
+	itt ne
 	addne r1, #1		@ Add one to counter if not.
 	bne 1b
 

@@ -1,5 +1,7 @@
 @ SkordalOS C Library
 @ (c) Kristian K. Skordal 2011 - 2012 <kristian.skordal@gmail.com>
+.syntax unified
+.section .text
 
 @ memcpy - Copies memory from source to destination.
 @ Arguments:
@@ -18,6 +20,7 @@ memcpy:
 	ldrb v1, [r1], #1
 	strb v1, [r3], #1
 	subs r2, #1
+	it ne
 	bne 1b
 
 	pop {r4, pc}
@@ -36,6 +39,7 @@ mempcpy:
 	ldrb r3, [r1], #1
 	strb r3, [r0], #1
 	subs r2, #1
+	it ne
 	bne 1b
 
 	mov pc, lr

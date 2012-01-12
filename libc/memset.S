@@ -1,5 +1,6 @@
 @ SkordalOS C Library
 @ (c) Kristian K. Skordal 2011 - 2012 <kristian.skordal@gmail.com>
+.syntax unified
 .section .text
 
 @ Fills a memory area with a specified amount of a constant byte.
@@ -16,6 +17,7 @@ memset:
 1:
 	str r1, [r3], #1
 	subs r2, #1
+	it ne
 	bne 1b
 
 	bx lr
