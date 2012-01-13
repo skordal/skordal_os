@@ -48,7 +48,7 @@ clean:
 
 # The totally-clean target also searches for swap files and deletes them:
 totally-clean: clean
-	find . -name .*.swp | xargs rm -vf
+	find . -name .\*.swp | xargs rm -vf
 
 # Object file targets:
 # TODO: Make automagic targets with dependency tracking :-)

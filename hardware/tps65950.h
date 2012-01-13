@@ -4,5 +4,8 @@
 #ifndef HARDWARE_TPS65950_H
 #define HARDWARE_TPS65950_H
 
+// Register offsets:
+#define TPS65950_VPLL2_DEDICATED	0x91
+
 #endif
 

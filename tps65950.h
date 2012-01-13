@@ -4,7 +4,12 @@
 #ifndef TPS65950_H
 #define TPS65950_H
 
+#include "types.h"
+
+#include "debug.h"
 #include "i2c.h"
+
+#include "hardware/tps65950.h"
 
 // Initializes the TPS65950:
 void tps65950_init();

@@ -8,6 +8,7 @@
 
 #include "debug.h"
 #include "gpio.h"
+#include "pm.h"
 
 // Initializes the display system:
 void display_init();

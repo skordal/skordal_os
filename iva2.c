@@ -6,7 +6,7 @@
 // Initializes the IVA2.2 module by setting up its MMU tables:
 void iva2_init()
 {
-	volatile uint32_t * iva_mmu = MMU_IVA2_BASE;
+	volatile uint32_t * iva_mmu = (volatile uint32_t *) MMU_IVA2_BASE;
 
 	debug_print_string("Initializing IVA2.2 module:");
 	debug_print_newline();

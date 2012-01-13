@@ -31,9 +31,6 @@ SECTIONS
 	data_end = .;
 	data_page_end = ALIGN(4096);
 
-	abort_stack_top = 0x9fd00000;
-	fiq_stack_top = 0x9fe00000;
-	irq_stack_top = 0x9ff00000;
 	kernel_stack_top = 0xa0000000;
 }
 
