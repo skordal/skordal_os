@@ -18,10 +18,11 @@ OBJECTS := \
 	mmu.o \
 	pm.o \
 	process.o \
+	sd.o \
 	spinlock.o \
 	start.o \
 	timer.o \
-	tps65950.o \
+	tps65950.o
 
 all: kernel #libc apps
 
@@ -48,6 +49,7 @@ clean:
 
 # The totally-clean target also searches for swap files and deletes them:
 totally-clean: clean
+	find . -name \*.o | xargs rm -vf
 	find . -name .\*.swp | xargs rm -vf
 
 # Object file targets:
@@ -94,6 +96,9 @@ pm.o: pm.c pm.h
 
 process.o: process.c process.h
 	$(CC) $(CFLAGS) -c process.c -o process.o
+
+sd.o: sd.c sd.h
+	$(CC) $(CFLAGS) -c sd.c -o sd.o
 
 spinlock.o: spinlock.S spinlock.h
 	$(CC) $(CFLAGS) -c spinlock.S -o spinlock.o

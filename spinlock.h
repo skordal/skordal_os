@@ -12,6 +12,9 @@ typedef uint32_t spinlock_t;
 // Locks a spinlock or waits for it to be ready:
 void spinlock_lock(spinlock_t * lock);
 
+// Checks if a spinlock is locked:
+bool spinlock_is_locked(spinlock_t * lock);
+
 // Unlocks a spinlock:
 void spinlock_unlock(spinlock_t * lock);
 

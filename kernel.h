@@ -11,6 +11,7 @@
 #include "irq.h"
 #include "pm.h"
 #include "process.h"
+#include "sd.h"
 #include "timer.h"
 #include "tps65950.h"
 

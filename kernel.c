@@ -31,6 +31,9 @@ void kernel_init()
 	// Initialize the display system:
 	display_init();
 
+	// Initialize the SD card interface:
+	sd_init();
+
 	// Initialize the process manager:
 	process_init_mgr();
 

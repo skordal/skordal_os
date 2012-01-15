@@ -23,6 +23,19 @@ spinlock_lock:
 
 	bx lr
 
+@ Checks if a spinlock is locked:
+@ Arguments:
+@ 	r0 = pointer to spinlock.
+@ Returns:
+@	r0 = 1 if spinlock os locked.
+.global spinlock_is_locked
+spinlock_is_locked:
+	ldr r1, [r0]
+	cmp r1, #0
+	moveq r0, #0
+	movne r0, #1
+	bx lr
+
 @ Unlocks a spinlock.
 @ Arguments:
 @	r0 = pointer to spinlock
