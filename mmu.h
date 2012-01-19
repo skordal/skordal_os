@@ -51,11 +51,9 @@ void mmu_clear_tlb();
 // is the descriptor table to create the mapping in, if NULL the kernel table is used.
 void mmu_map_interval(void * start_address, void * end_address, void * virtual_address,
 	mmu_mode_t mode, mmu_perm_t permissions, uint32_t * descriptor_table);
-// Unmaps the specified interval of virtual memory:
-void mmu_unmap_interval(void * start_address, void * end_address, uint32_t descriptor_table[]);
 
-// Creates a page table entry:
-uint32_t mmu_create_pt_entry(void * physical_address, mmu_mode_t mode, mmu_perm_t permissions);
+// Unmaps the specified interval of virtual memory:
+void mmu_unmap_interval(void * start_address, void * end_address, uint32_t * descriptor_table);
 
 // Initializes the page bitmap:
 void mmu_init_bitmap();

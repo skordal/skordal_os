@@ -5,6 +5,8 @@
 
 // Stores the size of RAM in bytes:
 uint32_t ramsize = 0;
+// Stores the amount of RAM used by the kernel:
+uint32_t kernel_ramspace = 0;
 
 // Symbols from the linker scripts:
 extern void * text_start, * text_end;
@@ -89,6 +91,9 @@ void mm_init()
 	// Initialize the kernel memory manager
 	dataspace_start = kernel_end;
 	dataspace_end = (void *) end_of_mapping + 4096;
+
+	// Set the amount of RAM curently used by the kernel:
+	kernel_ramspace = UNSIGNED_DIFF(dataspace_end, 0x80000000);
 
 	// Finished initializing the kernel mapping:
 	debug_print_string("ok");
@@ -194,6 +199,7 @@ void * mm_alloc(size_t size, int alignment)
 			if(block->next_block == NULL)
 			{
 				mm_inc_dataspace();
+				kernel_ramspace += 4096;
 
 				if(!block->used)
 					block->block_size += 4096;
@@ -234,6 +240,8 @@ void mm_free(void * memory)
 		block = mm_merge_blocks(block, block->next_block);
 	if(block->prev_block != NULL && !block->prev_block->used)
 		mm_merge_blocks(block, block->prev_block);
+	
+	// TODO: Reduce kernel memory space if possible.
 }
 
 // Merges two memory blocks:

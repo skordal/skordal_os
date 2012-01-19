@@ -24,6 +24,10 @@ static int total_pages = 0;
 // The total number of free pages available:
 static int free_pages = 0;
 
+// Creates a page table entry:
+inline uint32_t mmu_create_pt_entry(void * physical_address, mmu_mode_t mode,
+	mmu_perm_t permissions);
+
 // Initializes the MMU control registers:
 void mmu_init()
 {
@@ -167,19 +171,20 @@ void mmu_map_interval(void * start_address, void * end_address, void * virtual_a
 		int l2_index = MMU_GET_L2_INDEX((uint32_t) virtual);
 		page_table[l2_index] = mmu_create_pt_entry(physical, mode, permissions);
 		// Mark the page as used, if it is in RAM:
-		if(((uint32_t) physical & 0x80000000) != 0)
+		if((uint32_t) physical & 0x80000000)
 			mmu_mark_as_used(physical);
 	}
 }
 
 // Unmaps an interval of virtual memory and frees its page tables:
-void mmu_unmap_interval(void * start_address, void * end_address, uint32_t descriptor_table[])
+void mmu_unmap_interval(void * start_address, void * end_address, uint32_t * descriptor_table)
 {
 	// TODO: Write me :-)
 }
 
 // Creates a page table entry from the arguments:
-uint32_t mmu_create_pt_entry(void * physical_address, mmu_mode_t mode, mmu_perm_t permissions)
+inline uint32_t mmu_create_pt_entry(void * physical_address, mmu_mode_t mode, 
+	mmu_perm_t permissions)
 {
 	uint32_t retval = MMU_L2_TYPE_SMALL_PAGE|(int) physical_address;
 
