@@ -3,7 +3,7 @@
 include ../config.mk
 
 .PHONY: clean
-OBJECT_FILES := mask_left.o memmove.o zero_mem.o
+OBJECT_FILES := mask_left.o zero_mem.o
 
 all: $(OBJECT_FILES) functions.h
 	$(AR) rcs libasm_functions.a $(OBJECT_FILES)
@@ -11,9 +11,6 @@ all: $(OBJECT_FILES) functions.h
 
 mask_left.o: mask_left.S
 	$(CC) $(CFLAGS) -c mask_left.S -o mask_left.o
-
-memmove.o: memmove.S
-	$(CC) $(CFLAGS) -c memmove.S -o memmove.o
 
 zero_mem.o: zero_mem.S
 	$(CC) $(CFLAGS) -c zero_mem.S -o zero_mem.o
