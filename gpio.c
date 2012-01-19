@@ -3,6 +3,9 @@
 
 #include "gpio.h"
 
+// Gets the address of the module containing the specified GPIO pin:
+inline volatile void * gpio_get_module_addr(int gpio);
+
 // Initializes the GPIO interface:
 void gpio_init()
 {
@@ -75,9 +78,9 @@ void gpio_set_mode(int gpio, gpio_mode_t mode)
 	debug_print_string("[gpio_set_mode] setting GPIO ");
 	debug_print_dec(gpio);
 	if(GPIO_MODE_INPUT)
-		debug_print_string(" as input");
+		debug_print_string(" to input");
 	else
-		debug_print_string(" as output");
+		debug_print_string(" to output");
 	debug_print_newline();
 #endif
 
@@ -129,9 +132,10 @@ void gpio_toggle(int gpio)
 }
 
 // Gets the address of the module with the specified GPIO pin:
-volatile void * gpio_get_module_addr(int gpio)
+inline volatile void * gpio_get_module_addr(int gpio)
 {
 	int module = gpio / 32;
+
 	switch(module)
 	{
 		case 0:

@@ -36,8 +36,5 @@ void gpio_set_pin(int gpio, bool on);
 // Toggles a GPIO pin:
 void gpio_toggle(int gpio);
 
-// Gets the address of the module containing the specified GPIO pin:
-volatile void * gpio_get_module_addr(int gpio);
-
 #endif
 
