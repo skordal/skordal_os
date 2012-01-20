@@ -18,6 +18,7 @@ OBJECTS := \
 	mmu.o \
 	pm.o \
 	process.o \
+	rtc.o \
 	sd.o \
 	spinlock.o \
 	start.o \
@@ -96,6 +97,9 @@ pm.o: pm.c pm.h
 
 process.o: process.c process.h
 	$(CC) $(CFLAGS) -c process.c -o process.o
+
+rtc.o: rtc.c rtc.h
+	$(CC) $(CFLAGS) -c rtc.c -o rtc.o
 
 sd.o: sd.c sd.h
 	$(CC) $(CFLAGS) -c sd.c -o sd.o
