@@ -2,7 +2,10 @@
 @ (c) Kristian K. Skordal 2011 - 2012 <kristian.skordal@gmail.com>
 
 @ Zeroes out memory starting at the specified address and continuing for the
-@ specified length. C: void zero_mem(void * address, size_t length);
+@ specified length.
+@ Arguments:
+@ 	r0 = start address
+@	r1 = length
 .global zero_mem
 zero_mem:
 	add r1, r0, r1
@@ -16,6 +19,9 @@ zero_mem:
 
 @ Does the same as the above function, but works only on addresses and lengths
 @ aligned to 4.
+@ Arguments:
+@	r0 = start address
+@	r1 = length
 .global zero_mem_4
 zero_mem_4:
 	add r1, r0, r1

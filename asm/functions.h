@@ -6,6 +6,9 @@
 
 #include "../types.h"
 
+// Converts an 8-bit two digit BCD number to a normal binary number:
+uint8_t bcd2bin(uint8_t bcd);
+
 // Masks the bits to the left of and including the leftmost set bit in
 // the argument:
 uint32_t mask_left(uint32_t number);
