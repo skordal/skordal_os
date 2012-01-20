@@ -31,11 +31,13 @@ void pm_init()
 // Sets the voltage of the VPLL2 voltage regulator:
 void pm_set_vpll2(vpll2_mode_t mode)
 {
-	tps65950_write_reg(0x4b, TPS65950_VPLL2_DEDICATED, mode);
+	tps65950_write_reg(TPS65950_VPLL2_DEDICATED, mode);
 
+#ifdef DEBUG_PM
 	debug_print_string("[pm_set_vpll2] VPLL2 voltage set to mode ");
 	debug_print_dec(mode);
 	debug_print_newline();
+#endif
 }
 
 // Reboots the system by resetting the entire board:

@@ -22,6 +22,7 @@ RM      ?= rm
 #CFLAGS += -DDEBUG_MMU -DDEBUG_PAGETABLE # Uncomment this line to debug the MMU functions.
 #CFLAGS += -DDEBUG_IRQ # Uncomment to debug the IRQ handling code.
 #CFLAGS += -DDEBUG_GPIO # Uncomment this line to enable debugging the GPIO functions.
+#CFLAGS += -DDEBUG_PM # Uncomment to debug the power management functions.
 
 # Build flags:
 CFLAGS += -mcpu=cortex-a8 -mtune=cortex-a8 -Wa,-mcpu=cortex-a8+sec -ffreestanding \
