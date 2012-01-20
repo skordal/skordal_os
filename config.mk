@@ -13,9 +13,11 @@ RANLIB      := $(TOOL_PREFIX)-ranlib
 # Other tools:
 CP      ?= cp
 FIND    ?= find
+MAKE    ?= make
 MKDIR   ?= mkdir
 MKIMAGE ?= mkimage
 RM      ?= rm
+XARGS   ?= xargs
 
 # Debug flags:
 #CFLAGS += -DDEBUG_MM # Uncomment this line to debug the kernel memory manager.

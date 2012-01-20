@@ -10,7 +10,7 @@ APPLICATIONS := hello
 all: application.ld header.o $(APPLICATIONS)
 
 $(APPLICATIONS):
-	@make -C $@
+	@$(MAKE) -C $@
 
 header.o: header.S
 	$(CC) -c $(CFLAGS) header.S -o header.o
@@ -18,6 +18,6 @@ header.o: header.S
 clean:
 	$(RM) header.o
 	for dir in $(APPLICATIONS); do \
-		make -C $$dir clean; \
+		$(MAKE) -C $$dir clean; \
 	done
 

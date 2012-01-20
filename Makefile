@@ -25,10 +25,10 @@ OBJECTS := \
 	timer.o \
 	tps65950.o
 
-all: kernel #libc apps
+all: kernel # libc apps
 
 kernel: $(OBJECTS) skordal_os.ld
-	@make -C asm
+	@$(MAKE) -C asm
 	$(LD) $(LDFLAGS) -L asm -L libc -o skordal_os.elf -T skordal_os.ld \
 		$(OBJECTS) -lasm_functions
 	$(OBJCOPY) -S -O binary -j .text -j .data skordal_os.elf skordal_os.bin
@@ -36,22 +36,22 @@ kernel: $(OBJECTS) skordal_os.ld
 		-e 0x80008000 -n SkordalOS -d skordal_os.bin uImage
 
 apps: libc
-	@make -C apps
+	@$(MAKE) -C apps
 
 libc:
-	@make -C libc
+	@$(MAKE) -C libc
 
 clean:
-	@make -C asm clean
-	@make -C apps clean
-	@make -C libc clean
+	@$(MAKE) -C asm clean
+	@$(MAKE) -C apps clean
+	@$(MAKE) -C libc clean
 	-$(RM) $(OBJECTS)
 	-$(RM) skordal_os.bin skordal_os.elf uImage
 
 # The totally-clean target also searches for swap files and deletes them:
 totally-clean: clean
-	find . -name \*.o | xargs rm -vf
-	find . -name .\*.swp | xargs rm -vf
+	$(FIND) . -name \*.o | $(XARGS) $(RM) -vf
+	$(FIND) . -name .\*.swp | $(XARGS) $(RM) -vf
 
 # Object file targets:
 # TODO: Make automagic targets with dependency tracking :-)
