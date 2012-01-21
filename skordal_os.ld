@@ -8,6 +8,7 @@ SECTIONS
 	ram_base = 0x80000000;
 	stack_bottom = ram_base; . = stack_bottom;
 	stack_top = 0x80008000; . = stack_top;
+
 	text_start = .;
 	.text :
 	{
@@ -15,7 +16,8 @@ SECTIONS
 		*(.text*)
 	}
 
-	data_start = ALIGN(4096); . = data_start; text_end = data_start;
+	data_start = ALIGN(4096); . = data_start;
+	text_end = data_start;
 	.data :
 	{
 		*(.data*)
@@ -29,8 +31,8 @@ SECTIONS
 	}
 	bss_end = ALIGN(4); . = bss_end;
 	data_end = .;
-	data_page_end = ALIGN(4096);
 
+	data_page_end = ALIGN(4096);
 	kernel_stack_top = 0xa0000000;
 }
 

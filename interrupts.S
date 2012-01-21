@@ -5,10 +5,6 @@
 #include "hardware/intc.h"
 #include "hardware/processor.h"
 
-@ Number of the process switching FIQ:
-@ TODO: Find a way of making this dependent of the timer used.
-#define PROCESS_SWITCH_FIQ	37
-
 @ Initializes the interrupt handling code. This function
 @ sets the VBAR register to point to the table of interrupt
 @ handlers.
@@ -22,7 +18,7 @@ interrupts_init:
 @ Table of interrupt handlers.
 .balign 32
 interrupt_table:
-	mov pc, #0		@ Reset handler (not used)
+	ldr pc, =start		@ Reset handler (not used)
 	ldr pc, =undef		@ Undefined instruction
 	ldr pc, =svc		@ Supervisor call
 	ldr pc, =prefetch_abort	@ Prefetch abort
@@ -37,43 +33,43 @@ undef:
 	movs pc, lr
 
 svc:
-	push {r0 - r3, r12, lr}
+	push {r0 - r3, ip, lr}
 
 	@ Get the system call number:
-	ldr r0, [lr, #-4]
-	and r0, #0x00ffffff
+	tst lr, #1		@ Check if we were called from thumb code
+	@ If not called from thumb code:
+	ldreq r0, [lr, #-4]
+	andeq r0, #0x00ffffff
+	@ If called from thumb code:
+	ldrne r0, [lr, #-2]
+	andne r0, #0x000000ff
 
 	push {r0}
 	bl debug_print_dec
 	bl debug_print_newline
 	pop {r0}
 
-	cmp r0, #1
-1:
-	wfieq
-	beq 1b
-
-	pop {r0 - r3, r12, lr}
+	pop {r0 - r3, ip, lr}
 	movs pc, lr
 
 prefetch_abort:
 	sub lr, #4
 	srsdb sp!, #PROCESSOR_MODE_SVC
 	cps #PROCESSOR_MODE_SVC
-	push {r0 - r3, r12, lr}
+	push {r0 - r3, ip, lr}
 	mov r0, #'P'
 	bl debug_print_char
-	pop {r0 - r3, r12, lr}
+	pop {r0 - r3, ip, lr}
 	rfeia sp! 
 
 data_abort:
 	sub lr, #4
 	srsdb sp!, #PROCESSOR_MODE_SVC
 	cps #PROCESSOR_MODE_SVC
-	push {r0 - r3, r12, lr}
+	push {r0 - r3, ip, lr}
 	mov r0, #'D'
 	bl debug_print_char
-	pop {r0 - r3, r12, lr}
+	pop {r0 - r3, ip, lr}
 	rfeia sp! 
 
 irq:
@@ -119,8 +115,8 @@ fiq:
 	dsb
 	ldr r8, =INTC_BASE + 0x80000000
 	mov r9, #2
-	str r9, [r8, #INTC_CONTROL]
 	dsb
+	str r9, [r8, #INTC_CONTROL]
 
 	mov lr, ip
 	subs pc, lr, #4
