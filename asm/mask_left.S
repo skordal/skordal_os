@@ -10,8 +10,7 @@ mask_left:
 	clz r1, r0
 	mvn r2, #0
 	add r1, r1, #1
-	lsr r2, r2, r1
-	mvn r0, r2
+	mvn r0, r2, lsr r1
 	bx lr
 
 
