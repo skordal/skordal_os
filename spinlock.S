@@ -1,5 +1,5 @@
 @ SkordalOS Spinlocks
-@ (c) Kristian K. Skordal 2011 - 2012 - 2012
+@ (c) Kristian K. Skordal 2011 - 2012 <kristian.skordal@gmail.com>
 .section .text
 .align 4
 
@@ -9,9 +9,7 @@
 .global spinlock_lock
 spinlock_lock:
 	mvn r2, #0
-1:	@ BIG TODO: These functions should use the ldrex/strex, but these cause
-	@           data aborts. This should be investigated later, but for now,
-	@           this should work.
+1:	@ BIG TODO: These functions should use the ldrex/strex, but these cause data aborts!
 	ldr r1, [r0]
 @	ldrex r1, [r0]
 	cmp r1, #0
@@ -43,5 +41,4 @@ spinlock_is_locked:
 spinlock_unlock:
 	mvn r1, #0
 	str r1, [r0]
-	mov pc, lr
 	bx lr
