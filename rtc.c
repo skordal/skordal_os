@@ -14,7 +14,6 @@ void rtc_init()
 	if(rtc_status & RTC_RUNNING)
 	{
 		debug_print_string("\tRTC is running.");
-		debug_print_newline();
 	} else {
 		debug_print_string("\tSetting RTC: ");
 
@@ -27,8 +26,9 @@ void rtc_init()
 		tps65950_write_reg(TPS65950_YEARS_REG, 0);
 
 		debug_print_string("ok");
-		debug_print_newline();
 	}
+
+	debug_print_newline();
 }
 
 // Gets the time from the RTC:
