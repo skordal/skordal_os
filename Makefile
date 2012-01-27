@@ -3,7 +3,7 @@
 include config.mk
 
 # TODO: Fix dependency generation, to prevent rebuilds.
-.PHONY: clean all apps libc
+.PHONY: clean all apps libc tests
 OBJECTS := \
 	cpuid.o \
 	debug.o \
@@ -14,6 +14,7 @@ OBJECTS := \
 	irq.o \
 	iva2.o \
 	kernel.o \
+	list.o \
 	mm.o \
 	mmu.o \
 	pm.o \
@@ -25,7 +26,7 @@ OBJECTS := \
 	timer.o \
 	tps65950.o
 
-all: kernel # libc apps
+all: kernel # tests # libc apps
 
 kernel: $(OBJECTS) skordal_os.ld
 	@$(MAKE) -C asm
@@ -41,10 +42,14 @@ apps: libc
 libc:
 	@$(MAKE) -C libc
 
+tests:
+	@$(MAKE) -C tests
+
 clean:
 	@$(MAKE) -C asm clean
 	@$(MAKE) -C apps clean
 	@$(MAKE) -C libc clean
+	@$(MAKE) -C tests clean
 	-$(RM) $(OBJECTS)
 	-$(RM) skordal_os.bin skordal_os.elf uImage
 
@@ -85,6 +90,9 @@ iva2.o: iva2.c iva2.h
 
 kernel.o: kernel.c kernel.h
 	$(CC) $(CFLAGS) -c kernel.c -o kernel.o
+
+list.o: list.c list.h
+	$(CC) $(CFLAGS) -c list.c -o list.o
 
 mmu.o: mmu.c mmu.h types.h hardware/mmu.h
 	$(CC) $(CFLAGS) -c mmu.c -o mmu.o

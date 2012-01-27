@@ -1,0 +1,6 @@
+SkordalOS Architecture Independent Test Directory
+#################################################
+
+This folder contains test cases that may be run without starting the OS,
+improving development speed and comfort.
+
