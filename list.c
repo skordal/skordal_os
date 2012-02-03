@@ -29,6 +29,8 @@ void list_free(list_t * list)
 void list_append(list_t * list, void * data)
 {
 	list_node_t * new_node = mm_alloc(sizeof(list_node_t), 4);
+	new_node->next = NULL;
+	new_node->prev = NULL;
 	new_node->data = data;
 
 	if(list->last == NULL)
@@ -49,6 +51,8 @@ void list_append(list_t * list, void * data)
 void list_prepend(list_t * list, void * data)
 {
 	list_node_t * new_node = mm_alloc(sizeof(list_node_t), 4);
+	new_node->next = NULL;
+	new_node->prev = NULL;
 	new_node->data = data;
 
 	if(list->first == NULL)
