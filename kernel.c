@@ -18,15 +18,18 @@ void kernel_init()
 	// Set up IRQ handling:
 	irq_init();
 
-	// Initialize the GPIO driver:
-	gpio_init();
-
 	// Initialize the TPS65950 power chip:
 	tps65950_init();
+
+	// Initialize the GPIO driver:
+	gpio_init();
 
 	// Set up the uptime timer:
 	timer_reset(1, TIMER_MODE_AUTORELOAD, 1 * TIMER_SECOND, kernel_update_uptime);
 	timer_start(1);
+
+	// Start the RTC clock subsystem:
+	rtc_init();
 
 	// Initialize the display system:
 	display_init();
