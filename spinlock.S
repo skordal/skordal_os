@@ -39,6 +39,6 @@ spinlock_is_locked:
 @	r0 = pointer to spinlock
 .global spinlock_unlock
 spinlock_unlock:
-	mvn r1, #0
+	mov r1, #0
 	str r1, [r0]
 	bx lr
