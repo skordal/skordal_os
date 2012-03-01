@@ -87,18 +87,6 @@ bool list_decrease(list_t * list)
 	return true;
 }
 
-// Rewinds the current list position to the start of the list:
-void list_rewind(list_t * list)
-{
-	list->current = list->first;	
-}
-
-// Fast-forwards the list to the end:
-void list_fast_forward(list_t * list)
-{
-	list->current = list->last;
-}
-
 // Gets the current element in the list:
 void * list_get_element(list_t * list)
 {
@@ -106,18 +94,6 @@ void * list_get_element(list_t * list)
 		return NULL;
 	else
 		return list->current->data;
-}
-
-// Gets the current number of elements:
-size_t list_get_num_elements(list_t * list)
-{
-	return list->num_elements;
-}
-
-// Returns true if the list is empty:
-bool list_is_empty(list_t * list)
-{
-	return list_get_num_elements(list) == 0;
 }
 
 // Removes an element from the list:

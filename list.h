@@ -38,18 +38,18 @@ void list_prepend(list_t * list, void * data);
 bool list_advance(list_t * list);
 // Decreases the current list position, returns false if at the beginning of the list:
 bool list_decrease(list_t * list);
-// Rewinds the list position:
-void list_rewind(list_t * list);
 // Fast-forwards the list to the end:
-void list_fast_forward(list_t * list);
+#define list_fast_forward(list) list->current = list->last
+// Rewinds the list to the beginning:
+#define list_rewind(list) list->current = list->first
 
 // Gets the element at the current list position:
 void * list_get_element(list_t * list);
 // Gets the current number of elements:
-size_t list_get_num_elements(list_t * list);
+#define list_get_num_elements(list) list->num_elements
 
 // Returns true if the list is empty:
-bool list_is_empty();
+#define list_is_empty(list) list_get_num_elements(list) == 0
 
 // Returns true if the current position is at the beginning of the list:
 bool list_at_beginning(list_t * list);
