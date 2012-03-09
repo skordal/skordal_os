@@ -52,37 +52,16 @@ int main(int argc, char * argv[])
 	}
 	printf("ok\n");
 
-	// Go through the list backwards:
-	printf("\tVerifying the list backwards: ");
-	list_fast_forward(test_list);
-	for(int i = 9; i >= 0; --i)
-	{
-		void * data = list_get_element(test_list);
-		if((int) data != i)
-		{
-			printf("failed!\t(invalid element)\n");
-			break;
-		}
-		printf("%d ", (int) data);
-
-		if(!list_decrease(test_list) && i > 0)
-		{
-			printf("failed!\t(end of list reached)\n");
-			break;
-		}
-	}
-	printf("ok\n");
-
 	// Delete all list elements:
 	printf("\tDeleting all elements: ");
-	list_rewind(test_list);
-	while(!list_is_empty(test_list))
-	{
-		printf("%d ", (int) list_remove(test_list));
-		if(test_list->current == NULL)
-			break;
-	}
-	printf("ok\n");
+//	list_rewind(test_list);
+//	while(!list_is_empty(test_list))
+//	{
+//		printf("%d ", (int) list_remove(test_list));
+//		if(test_list->current == NULL)
+//			break;
+//	}
+	printf("not implemented\n");
 
 	// Test prepending elements:
 	printf("\tPrepending 10 elements: ");

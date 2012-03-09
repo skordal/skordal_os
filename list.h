@@ -14,7 +14,7 @@
 
 // List node structure:
 typedef struct __list_node_t {
-	struct __list_node_t * next, * prev;
+	struct __list_node_t * next;
 	void * data;
 } list_node_t;
 
@@ -36,10 +36,6 @@ void list_prepend(list_t * list, void * data);
 
 // Advances the current list position, returns false if at the end of the list:
 bool list_advance(list_t * list);
-// Decreases the current list position, returns false if at the beginning of the list:
-bool list_decrease(list_t * list);
-// Fast-forwards the list to the end:
-#define list_fast_forward(list) list->current = list->last
 // Rewinds the list to the beginning:
 #define list_rewind(list) list->current = list->first
 
@@ -55,13 +51,6 @@ void * list_get_element(list_t * list);
 bool list_at_beginning(list_t * list);
 // Returns true if the current position is at the end of the list:
 bool list_at_end(list_t * list);
-
-// Deletes the element at the current list position, returns NULL if there
-// are no elements left in the list (but also if the element at the current
-// location actually was NULL, use list_at_end(l) or list_at_beginning(l)
-// to be sure). The current pointer is set to the next element if possible,
-// if not it is set to the previous.
-void * list_remove(list_t * list);
 
 #endif
 

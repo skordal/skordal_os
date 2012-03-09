@@ -30,7 +30,6 @@ void list_append(list_t * list, void * data)
 {
 	list_node_t * new_node = mm_alloc(sizeof(list_node_t), 4);
 	new_node->next = NULL;
-	new_node->prev = NULL;
 	new_node->data = data;
 
 	if(list->last == NULL)
@@ -39,7 +38,6 @@ void list_append(list_t * list, void * data)
 		list->last = new_node;
 		list->current = new_node;
 	} else {
-		new_node->prev = list->last;
 		list->last->next = new_node;
 		list->last = new_node;
 	}
@@ -52,7 +50,6 @@ void list_prepend(list_t * list, void * data)
 {
 	list_node_t * new_node = mm_alloc(sizeof(list_node_t), 4);
 	new_node->next = NULL;
-	new_node->prev = NULL;
 	new_node->data = data;
 
 	if(list->first == NULL)
@@ -62,7 +59,6 @@ void list_prepend(list_t * list, void * data)
 		list->current = new_node;
 	} else {
 		new_node->next = list->first;
-		list->first->prev = new_node;
 		list->first = new_node;
 	}
 
@@ -78,15 +74,6 @@ bool list_advance(list_t * list)
 	return true;
 }
 
-// Decreases the list one position:
-bool list_decrease(list_t * list)
-{
-	if(list->current == NULL || list->current->prev == NULL)
-		return false;
-	list->current = list->current->prev;
-	return true;
-}
-
 // Gets the current element in the list:
 void * list_get_element(list_t * list)
 {
@@ -94,35 +81,5 @@ void * list_get_element(list_t * list)
 		return NULL;
 	else
 		return list->current->data;
-}
-
-// Removes an element from the list:
-void * list_remove(list_t * list)
-{
-	if(list_is_empty(list) || list->current == NULL)
-		return NULL;
-	
-	list_node_t * current_node = list->current;
-	void * retval = current_node->data;
-
-	if(current_node->prev == NULL)
-		list->first = current_node->next;
-	else
-		current_node->prev->next = current_node->next;
-
-	if(current_node->next == NULL)
-		list->last = current_node->prev;
-	else
-		current_node->next->prev = current_node->prev;
-
-	if(current_node->next != NULL)
-		list->current = current_node->next;
-	else
-		list->current = current_node->prev;
-
-	--list->num_elements;
-	mm_free(current_node);
-
-	return retval;
 }
 
