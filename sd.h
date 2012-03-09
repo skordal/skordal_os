@@ -10,7 +10,6 @@
 #include "hardware/mmchs.h"
 
 #include "debug.h"
-#include "gpio.h"
 #include "mmu.h"
 
 // Initializes the SD card module. On the BeagleBoard, only the first MMC
