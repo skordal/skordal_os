@@ -77,28 +77,9 @@ irq:
 	srsdb #PROCESSOR_MODE_SVC!
 	cps #PROCESSOR_MODE_SVC
 
-	@ Store user registers:
-	stmdb sp, {r0 - lr}^
-	sub sp, #15*4
-	mrs r0, spsr
-	push {r0, lr}
-
-	@ Save the pointer to the user registers:
-	mov r0, sp
-	ldr r1, =user_registers
-	str r0, [r1]
-
+	push {r0 - r3, ip, lr}
 	bl irq_handler
-
-	@ Restore user registers from the user register pointer:
-	ldr r0, =user_registers
-	ldr r0, [r0]
-	ldmia r0!, {r1, lr}
-	msr spsr, r1
-	ldmia r0, {r0 - lr}^
-
-	@ Restore the stack pointer:
-	add sp, #17*4
+	pop {r0 - r3, ip, lr}
 
 	rfeia sp!
 
@@ -120,12 +101,4 @@ fiq:
 
 	mov lr, ip
 	subs pc, lr, #4
-
-.section .bss
-
-@ The address of the user mode registers is stored here upon entry
-@ to the IRQ handler. This is used by the process switching handler.
-.global user_registers
-user_registers:
-	.skip 4
 
