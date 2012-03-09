@@ -9,10 +9,7 @@ static uint64_t uptime_counter = 0;
 // Initializes the kernel, devices and related structures:
 void kernel_init()
 {
-	// Get the CPUID information:
-	cpuid_init();
-
-	// Start the power management driver:
+	// Start power management:
 	pm_init();
 
 	// Set up IRQ handling:
@@ -28,17 +25,8 @@ void kernel_init()
 	timer_reset(1, TIMER_MODE_AUTORELOAD, 1 * TIMER_SECOND, kernel_update_uptime);
 	timer_start(1);
 
-	// Start the RTC clock subsystem:
-	rtc_init();
-
-	// Initialize the display system:
-	display_init();
-
 	// Initialize the SD card interface:
 	sd_init();
-
-	// Initialize the process manager:
-	process_init_mgr();
 
 	// We are now completely initialized:
 	debug_print_string("Kernel started successfully.");
@@ -55,6 +43,7 @@ void __attribute((noreturn)) kernel_main()
 void kernel_update_uptime()
 {
 	++uptime_counter;
+
 	// Make one of the GPIOs into an uptime clock:
 	gpio_toggle(GPIO_USER_LED0);
 }

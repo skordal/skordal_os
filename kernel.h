@@ -4,14 +4,10 @@
 #ifndef KERNEL_H
 #define KERNEL_H
 
-#include "cpuid.h"
 #include "debug.h"
-#include "display.h"
 #include "gpio.h"
 #include "irq.h"
 #include "pm.h"
-#include "process.h"
-#include "rtc.h"
 #include "sd.h"
 #include "timer.h"
 #include "tps65950.h"

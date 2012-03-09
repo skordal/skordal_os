@@ -5,21 +5,16 @@ include config.mk
 # TODO: Fix dependency generation, to prevent rebuilds.
 .PHONY: clean all apps libc tests
 OBJECTS := \
-	cpuid.o \
 	debug.o \
-	display.o \
 	gpio.o \
 	i2c.o \
 	interrupts.o \
 	irq.o \
-	iva2.o \
 	kernel.o \
 	list.o \
 	mm.o \
 	mmu.o \
 	pm.o \
-	process.o \
-	rtc.o \
 	sd.o \
 	spinlock.o \
 	start.o \
@@ -61,17 +56,8 @@ totally-clean: clean
 # Object file targets:
 # TODO: Make automagic targets with dependency tracking :-)
 
-cpuid.o: cpuid.c cpuid.h
-	$(CC) $(CFLAGS) -c cpuid.c -o cpuid.o
-
-data_abort.o: data_abort.S
-	$(CC) $(CFLAGS) -c data_abort.S -o data_abort.o
-
 debug.o: debug.c debug.h
 	$(CC) $(CFLAGS) -c debug.c -o debug.o
-
-display.o: display.c display.h
-	$(CC) $(CFLAGS) -c display.c -o display.o
 
 gpio.o: gpio.c gpio.h
 	$(CC) $(CFLAGS) -c gpio.c -o gpio.o
@@ -84,9 +70,6 @@ interrupts.o: interrupts.S
 
 irq.o: irq.c irq.h
 	$(CC) $(CFLAGS) -c irq.c -o irq.o
-
-iva2.o: iva2.c iva2.h
-	$(CC) $(CFLAGS) -c iva2.c -o iva2.o
 
 kernel.o: kernel.c kernel.h
 	$(CC) $(CFLAGS) -c kernel.c -o kernel.o
@@ -102,12 +85,6 @@ mm.o: mm.c mm.h
 
 pm.o: pm.c pm.h
 	$(CC) $(CFLAGS) -c pm.c -o pm.o
-
-process.o: process.c process.h
-	$(CC) $(CFLAGS) -c process.c -o process.o
-
-rtc.o: rtc.c rtc.h
-	$(CC) $(CFLAGS) -c rtc.c -o rtc.o
 
 sd.o: sd.c sd.h
 	$(CC) $(CFLAGS) -c sd.c -o sd.o
