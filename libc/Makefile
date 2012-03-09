@@ -3,11 +3,13 @@
 include ../config.mk
 .PHONY: all clean
 
-# Objects to build:
-OBJECT_FILES := \
-	memset.o \
-	strcpy.o \
-	strlen.o
+SOURCE_FILES :=
+ASSEMBLER_FILES := \
+	memset.S \
+	strcpy.S \
+	strlen.S
+
+OBJECT_FILES := $(SOURCE_FILES:.c=.o) $(ASSEMBLER_FILES:.S=.o)
 
 # Main build target, builds the entire C library:
 all: copyfiles $(OBJECT_FILES)
@@ -19,17 +21,14 @@ copyfiles:
 	$(MKDIR) -p include/sys
 	$(CP) ../types.h include/sys
 
-memset.o: memset.S
-	$(CC) -c $(CFLAGS) -isystem include memset.S -o memset.o
-
-strcpy.o: strcpy.S
-	$(CC) -c $(CFLAGS) -isystem include strcpy.S -o strcpy.o
-
-strlen.o: strlen.S
-	$(CC) -c $(CFLAGS) -isystem include strlen.S -o strlen.o
-
 clean:
 	-$(RM) include/sys/types.h
 	-$(RM) $(OBJECT_FILES)
 	-$(RM) libc.a
+
+%.o: %.S
+	$(CC) $(CFLAGS) -c -isystem include $< -o $@
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c -isystem include $< -o $@
 
