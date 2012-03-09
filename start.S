@@ -16,8 +16,8 @@ start:
 	ldr r1, =bss_end
 	eor r2, r2, r2
 1:
-	str r2, [r0], #4
 	cmp r0, r1
+	strne r2, [r0], #4
 	bne 1b
 
 	@ Clear the local monitor to prevent faults when using spinlocks:
