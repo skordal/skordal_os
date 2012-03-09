@@ -6,33 +6,33 @@ SECTIONS
 	app_stack_top = 0x80000000;
 
 	ram_base = 0x80000000;
-	stack_bottom = ram_base; . = stack_bottom;
-	stack_top = 0x80008000; . = stack_top;
+	stack_bottom = ram_base;
+	stack_top = 0x80008000;
 
-	text_start = .;
-	.text :
+	.text 0x80008000 :
 	{
+		text_start = .;
 		start.o(.text)
 		*(.text*)
 	}
+	text_end = ALIGN(4096);
 
-	data_start = ALIGN(4096); . = data_start;
-	text_end = data_start;
-	.data :
+	.data : ALIGN(4096)
 	{
+		data_start = .;
 		*(.data*)
 		*(.rodata*)
 	}
 
-	bss_start = ALIGN(4); . = bss_start;
-	.bss :
+	.bss : ALIGN(4)
 	{
+		bss_start = .;
 		*(.bss*)
 	}
-	bss_end = ALIGN(4); . = bss_end;
-	data_end = .;
+	bss_end = ALIGN(4);
+	data_end = ALIGN(4096);
 
-	data_page_end = ALIGN(4096);
+	data_page_end = data_end;
 	kernel_stack_top = 0xa0000000;
 }
 
