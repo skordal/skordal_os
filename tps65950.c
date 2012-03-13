@@ -9,11 +9,6 @@ void tps65950_init()
 	// Initialize the I2C interface:
 	i2c_init(0, I2C_100KHZ);
 	i2c_set_master(0);
-
-	debug_print_string("Initializing the TPS65950 power management chip: ");
-	// Nothing in particular is done here yet.
-	debug_print_string("ok");
-	debug_print_newline();
 }
 
 // Reads a register:

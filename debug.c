@@ -39,7 +39,7 @@ void debug_print_dec(uint32_t number)
 
 	for(int i = 9; i >= 0; --i)
 	{
-		buffer[i] = (unsigned char) '0' + (number % 10);
+		buffer[i] = (char) '0' + (number % 10);
 		number /= 10;
 	}
 
