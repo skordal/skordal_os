@@ -190,9 +190,6 @@ inline uint32_t mmu_create_pt_entry(void * physical_address, mmu_mode_t mode,
 
 	switch(mode)
 	{
-		// Note that none of the modes have the S bit set. This is because use of
-		// this bit in the descriptors caused prefetch aborts when trying to use
-		// ldrex/strex with memory mapped as shareable.
 		case MMU_MODE_DEVICE:
 			retval |= MMU_L2_SP_XN|MMU_L2_SP_S|MMU_L2_SP_B;
 			break;
