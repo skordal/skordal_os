@@ -294,13 +294,6 @@ mm_blk_info_t * mm_split_block(mm_blk_info_t * block, uint32_t offset)
 	return new_block;
 }
 
-// Create a new memory block in the middle of another block, starting and ending in
-// the specified positions:
-// |---A---F---S------| ===> |---A---||F---S||-B-|
-mm_blk_info_t * mm_cut_block(mm_blk_info_t * block, uint32_t first_index, uint32_t second_index)
-{
-}
-
 // Increases the kernel dataspace by 1 page:
 void mm_inc_dataspace()
 {

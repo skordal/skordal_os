@@ -44,8 +44,6 @@ void mm_free(void * memory);
 mm_blk_info_t * mm_merge_blocks(mm_blk_info_t * a, mm_blk_info_t * b);
 // Splits the a block in two at the specified position:
 mm_blk_info_t * mm_split_block(mm_blk_info_t * block, uint32_t offset);
-// Creates a block in the middle of another block, at the two specified cut indexes:
-mm_blk_info_t * mm_cut_block(mm_blk_info_t * block, uint32_t first_split, uint32_t second_split);
 
 // Increases the kernel dataspace by 1 page:
 void mm_inc_dataspace();
