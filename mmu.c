@@ -34,7 +34,6 @@ void mmu_init()
 	// Set up the MMU registers:
 	asm volatile(
 		// Clear TLB cache:
-		"mov v1, #0\n\t"
 		"mcr p15, 0, v1, c8, c7, 0\n\t"
 		// Set up the TTBCR register, with N = 1:
 		"mov v1, #1\n\t"
@@ -47,7 +46,6 @@ void mmu_init()
 		"ldr v1, =0x55555555\n\t"
 		"mcr p15, 0, v1, c3, c0, 0\n\t"
 		// Invalidate TLB cache again:
-		"mov v1, #0\n\t"
 		"mcr p15, 0, v1, c8, c7, 0\n\t"
 		:
 		:
