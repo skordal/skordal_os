@@ -28,11 +28,9 @@ start:
 	mcr p15, 0, r0, c1, c0, 2
 	isb
 
-@	vmrs r0, FPEXC		@ Not recognized by the GNU binutils
-	.inst 0b11101110111110000000101000010000
+	vmrs r0, FPEXC
 	orr r0, #(1 << 30)
-@	vmsr FPEXC, r0		@ Not recognized by the GNU binutils
-	.inst 0b11101110111010000000101000010000
+	vmsr FPEXC, r0
 
 	@ Print a short message to show we are working:
 	ldr r0, =boot_message
