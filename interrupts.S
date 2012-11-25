@@ -37,13 +37,17 @@ svc:
 
 	@ Get the system call number:
 	tst lr, #1		@ Check if we were called from thumb code
-	@ If not called from thumb code:
-	ldreq r0, [lr, #-4]
-	andeq r0, #0x00ffffff
-	@ If called from thumb code:
-	ldrne r0, [lr, #-2]
-	andne r0, #0x000000ff
 
+	@ If not called from thumb code:
+	ldrne r0, [lr, #-4]
+	andne r0, #0x00ffffff
+	bne 1f
+
+	@ If called from thumb code:
+	ldrh r0, [lr, #-2]
+	and r0, #0x000000ff
+
+1:
 	push {r0}
 	bl debug_print_dec
 	bl debug_print_newline
